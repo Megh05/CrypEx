@@ -1,0 +1,41 @@
+{% extends 'highlight/spotlight_base.html' %}
+{% block title %}Most Visited{% endblock %}
+{% block body %}
+    <h4>Most Viewed Cryptocurrencies on crypEx</h4>
+    <div style="width: 100%; display: flex">
+        <table class="table table-hover">
+            <thead class="table tab-pane">
+                <tr>
+                    <td>#</td>
+                    <td>Name</td>
+                    <td>Price</td>
+                    <td>Forecast 1H</td>
+                    <td>Forecast 24H</td>
+                </tr>
+            </thead>
+            {% for crypto_list in most_visited_crypto_list %}
+                <tr onclick="window.location.href='{% url 'details' crypto_list.name %}'">
+                    <td>{{ crypto_list.id }}</td>
+                    <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                    <td>$ {{ crypto_list.price }}</td>
+                    <td>
+                        <div class="forecast" style="display: flex; width: 33%;">
+                            <div style="margin: auto; width: 0;">
+                                <div class="arrowContainer"></div>
+                            </div>
+                            <div>{{ crypto_list.forecast_1h }} %</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="forecast" style="display: flex; width: 33%;">
+                            <div style="margin: auto; width: 0;">
+                                <div class="arrowContainer"></div>
+                            </div>
+                            <div>{{ crypto_list.forecast_24h }} %</div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

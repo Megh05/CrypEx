@@ -1,0 +1,81 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto Nest</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'exchange/styles.css' %}">
+<!--    <link rel="stylesheet" type="text/css" href="{% static 'exchange/css/bootstrap.css' %}">-->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Add any custom CSS links or styles here -->
+    <script>
+    tailwind.config = {
+      theme: {
+          container: {
+            center: true,
+          },
+        extend: {
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+<nav class="bg-white shadow-md  w-full flex items-center justify-between py-2 px-12 ">
+           <div>
+               <div class="">
+                <a><img class="logo w-30" alt="logo" src="{% static 'exchange/img/logo-color.png' %}" ></a>
+            </div>
+                     </div>
+                <div class="">
+                    <a class="mr-1.5 font-semibold hover:text-[#1e3a8a] transition-all duration-200" href='{% url 'login' %}'>
+                        Login
+                    </a>
+
+                    <a class="mr-1.5  font-semibold hover:text-[#1e3a8a] transition-all duration-200" href='{% url 'register' %}'>
+                        Register
+                    </a>
+                </div>
+
+            </nav>
+            <h1 class="text-center mb-3 mt-4 tracking-wide text-3xl font-bold font-montserrat text-[#52525b]">Cryptocurrencies</h1>
+ <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>1-Hour Change</th>
+                                <th>24-Hour Change</th>
+                                <th>Market Cap</th>
+                                <th>24-Hour Volume</th>
+                                <th>Circulating Supply</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for currency in cryptocurrencies %}
+                                <tr class="{% cycle 'even' 'odd' %}" onclick="window.location.href='{% url 'details' currency.name %}'">
+                                    <td>{{currency.id}}</td>
+                                    <td>{{ currency.name }}</td>
+                                    <td>{{ currency_symbol }} {{ currency.price }}</td>
+                                    <td>
+                                        <span class="{% if currency.forecast_1h >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                            {{ currency.forecast_1h }}%
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="{% if currency.forecast_24h >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                            {{ currency.forecast_24h }}%
+                                        </span>
+                                    </td>
+                                    <td>{{ currency.market_cap }}</td>
+                                    <td>{{ currency.volume }}</td>
+                                    <td>{{ currency.circulating_supply }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+</body>
+</html>

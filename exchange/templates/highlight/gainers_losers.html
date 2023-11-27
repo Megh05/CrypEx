@@ -1,0 +1,98 @@
+{% extends 'highlight/spotlight_base.html' %}
+{% block title %}Gainers - Losers{% endblock %}
+{% block body %}
+    <div style="width: 100%;">
+        <h4>Top Crypto Gainers And Losers Today</h4>
+        Those are the cryptocurrencies who either gained the most or lost the most in one day.
+        <div style="display: flex; width: 100%">
+            <div style="margin: auto; width: 49%">
+                <table class="table table-hover">
+                    <thead class="table">
+                        <tr style="height: auto; width: 100%;">
+                            <div style="background: rgba(0,255,28,0.5); font-size: x-large; text-align: center">Gainers</div>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>Name</td>
+                            <td>Price</td>
+                            <td>Forecast 24H</td>
+                            <td>Forecast 1H</td>
+                        </tr>
+                    </thead>
+                    {% for crypto_list in gainers_crypto_list %}
+                        <tr onclick="window.location.href='{% url 'details' crypto_list.name %}'">
+                            <td>{{ crypto_list.id }}</td>
+                            <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                            <td>$ {{ crypto_list.price }}</td>
+                            <td>
+                                <div style="display: flex; width: 80%; color: #198600">
+                                    <div style="margin: auto; width: 0;">
+                                        <div style="width: 0;
+                                            height: 0;
+                                            border-left: 5px solid transparent;
+                                            border-right: 5px solid transparent;
+                                            border-bottom: 7px solid #198600; ">
+                                        </div>
+                                    </div>
+                                    <div>{{ crypto_list.forecast_24h }} %</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="forecast" style="display: flex; width: 80%;">
+                                    <div style="margin: auto; width: 0;">
+                                        <div class="arrowContainer"></div>
+                                    </div>
+                                    <div>{{ crypto_list.forecast_1h }} %</div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div style="margin: auto; width: 49%">
+                <table class="table table-hover">
+                    <thead class="table">
+                        <tr style="height: auto; width: 100%;">
+                            <div style="background: rgba(255,0,0,0.5); font-size: x-large; text-align: center">Losers</div>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>Name</td>
+                            <td>Price</td>
+                            <td>Forecast 24H</td>
+                            <td>Forecast 1H</td>
+                        </tr>
+                    </thead>
+                    {% for crypto_list in losers_crypto_list %}
+                        <tr onclick="window.location.href='{% url 'details' crypto_list.name %}'">
+                            <td>{{ crypto_list.id }}</td>
+                            <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                            <td>$ {{ crypto_list.price }}</td>
+                            <td>
+                                <div style="display: flex; width: 80%; color: #FF0000">
+                                    <div style="margin: auto; width: 0;">
+                                        <div style="width: 0;
+                                            height: 0;
+                                            border-left: 5px solid transparent;
+                                            border-right: 5px solid transparent;
+                                            border-top: 7px solid #FF0000; ">
+                                        </div>
+                                    </div>
+                                    <div>{{ crypto_list.forecast_24h }} %</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="forecast" style="display: flex; width: 80%;">
+                                    <div style="margin: auto; width: 0;">
+                                        <div class="arrowContainer"></div>
+                                    </div>
+                                    <div>{{ crypto_list.forecast_1h }} %</div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

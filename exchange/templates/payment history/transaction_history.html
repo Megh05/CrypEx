@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Transaction History - CrypEx{% endblock %}
+
+{% block content %}
+    <div class="container mt-4 self-start">
+        <h2 class="text-center mb-3 mt-[-2] tracking-wide text-3xl font-bold font-montserrat text-[#52525b]">Transaction History</h2>
+        <table class="w-full">
+            <thead class="bg-[#4db6ac] text-white">
+                <tr>
+                    <th class="">Cryptocurrency</th>
+                    <th class="">Quantity</th>
+                    <th class="">Transaction Type</th>
+                    <th class="">Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in user_transactions %}
+                    <tr class="">
+                        <td class="py-2 px-4">{{ transaction.cryptocurrency.name }}</td>
+                        <td class="py-2 px-4">{{ transaction.quantity }}</td>
+                        <td class="py-2 px-4">{{ transaction.transaction_type }}</td>
+                        <td class="py-2 px-4">{{ transaction.timestamp }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</style>
+{% endblock %}

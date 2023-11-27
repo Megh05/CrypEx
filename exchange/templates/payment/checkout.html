@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container mt-5">
+    <div class="checkout-container">
+      <h1 class="mb-8 bg-[#eff6ff] tracking-wide text-3xl font-bold text-[#52525b]">Checkout</h1>
+      <p>You are about to buy {{ quantity }} {{ cryptocurrency.name }}.</p>
+      <p>Total cost: ${{ total_cost }}</p>
+
+      <form method="post" id="payment-form" class="mt-4">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="credit_card_number">Credit Card Number:</label>
+          <div id="card-element" class="form-control"></div>
+        </div>
+        <!-- Used to display form errors. -->
+        <div id="card-errors" role="alert" class="error-message mt-2"></div>
+        <button type="submit" class=" text-[#ffffff] hover:text-[#ffff] bg-blue-500 hover:bg-blue-700 w-full py-1 mt-3 ">Buy Now</button>
+      </form>
+    </div>
+
+    <!-- Add the following Stripe.js script to the bottom of your template -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+      var stripe = Stripe('pk_test_51O982oBtZSYWekNBm7WDEKEpRp5AXZeNCGvQc2SyrwaYJoewZbzkagURro7Es00ppgvwykPY5pzcSyM4INbVSAIa00rb689zwN');
+      var elements = stripe.elements();
+
+      // Create an instance of the card Element.
+      var card = elements.create('card');
+
+      // Add an instance of the card Element into the `card-element` div.
+      card.mount('#card-element');
+
+      // Handle real-time validation errors from the card Element.
+      card.addEventListener('change', function (event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
+
+      // Handle form submission.
+      var form = document.getElementById('payment-form');
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        stripe.createToken(card).then(function (result) {
+          if (result.error) {
+            // Inform the user if there was an error.
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+          } else {
+            // Send the token to your server.
+            stripeTokenHandler(result.token);
+          }
+        });
+      });
+
+      // Submit the form with the token ID.
+      function stripeTokenHandler(token) {
+        // Insert the token ID into the form so it gets submitted to the server.
+        var form = document.getElementById('payment-form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput);
+
+        // Submit the form
+        form.submit();
+      }
+    </script>
+  </div>
+  <style>
+    body {
+      background-color: #f0f0f0; /* Light gray background color */
+      font-family: Arial, sans-serif; /* Use your preferred font-family */
+    }
+    .checkout-container {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 24px;
+      color: #333;
+    }
+    p {
+      font-size: 16px;
+      color: #555;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+     h1 {
+            color: #007bff; /* Blue header color */
+        }
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .error-message {
+      color: #ff0000;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+  </style>
+{% endblock %}

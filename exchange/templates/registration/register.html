@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Create Your Account {% endblock %} 
+
+{% block content %}
+     <div class="form-left h-screen">
+            <div class="logo-wrapper">
+                <img class="logo" alt="logo" src="../../static/exchange/img/logo-color.png">
+            </div>
+            <div class="app-content mt-2">
+              <p>Welcome to CryptoNest</p>
+              <span class="logo-gif"><img src="../../static/exchange/img/buy.gif" alt="Buy Icon"> Buy</span>
+              <span class="logo-gif"><img src="../../static/exchange/img/sell.gif" alt="Sell Icon"> Sell</span>
+              <span class="logo-gif"><img src="../../static/exchange/img/track.gif" alt="Track Icon"> Track</span>
+            </div>
+
+            <div class="hero-wrapper">
+            <img class="hero-img swing-animation" alt="attr" src="../../static/exchange/img/bitcoin1.png">
+            </div>
+        </div>
+
+<div class="form-wrapper h-screen">
+         <h1 class = "form-h1 mb-3">Create Your Account</h1>
+    {% if form.errors %}
+        <p>
+            Please, Check Your Username and Password
+        </p>
+    {% endif %}
+    <div class='login-form'>
+         <form method='post' class="--form-wrapper">
+            {{ user_form.as_p }}
+            {% csrf_token %}
+             <p><input class="text-[#ffffff] hover:text-[#ffff] bg-blue-500 hover:bg-blue-700" type='submit' value='Create Account'></p>
+         </form>
+
+           <a class="form-link" href="{% url 'login' %}">
+               Already have an account? Log In.
+            </a>
+    </div>
+         <div class="img-container">
+             <img class="logo-man" alt="attr" src="../../static/exchange/img/manwithcoins.png"></div>
+      </div>
+{% endblock %}

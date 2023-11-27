@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <h1 class="mb-8 tracking-wide text-3xl font-bold text-[#2563eb]">Success!</h1>
+    {% if success_message %}
+      <div class="" role="alert">
+        {{ success_message }}
+      </div>
+    {% endif %}
+<!--    <p>Your transaction was successful. Thank you!</p>-->
+  </div>
+{% endblock %}

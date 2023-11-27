@@ -1,0 +1,50 @@
+{% load static %}
+<html>
+<head>
+     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'exchange/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'exchange/styles.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Add any custom CSS links or styles here -->
+    <script>
+    tailwind.config = {
+      theme: {
+          container: {
+            center: true,
+          },
+        extend: {
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+ {% if request.user.is_authenticated %}
+                 <nav class=" shadow-md  w-full flex items-center justify-between py-2 px-12 ">
+                     <div>
+                         <div class="">
+                <a href ="{% url 'crypto_list' %}"><img class="logo w-30" alt="logo" src="{% static 'exchange/img/logo-color.png' %}" ></a>
+            </div>
+
+                     </div>
+                 <div class="">
+                     <a class="mr-1.5 font-semibold hover:text-[#1e3a8a] transition-all duration-200" href="{% url 'profile' %}">Profile</a>
+                     <a class="mr-1.5 font-semibold hover:text-[#1e3a8a] transition-all duration-200" href="{% url 'payment_gateway' %}">Buy Crypto</a>
+                     <a class="mr-1.5 font-semibold hover:text-[#1e3a8a] transition-all duration-200" href="{% url 'sell_crypto' %}">Sell Holdings</a>
+                     <a class="mr-1.5 font-semibold hover:text-[#1e3a8a] transition-all duration-200" href="{% url 'transaction_history' %}">Transaction History</a>
+                     <a class="mr-1.5 font-semibold hover:text-[#1e40af] transition-all duration-200" href="{% url 'password_change' %}">Change Password</a>
+                     <a class="mr-1.5 font-semibold hover:text-[#1e3a8a] transition-all duration-200" href="{% url 'logout' %}">Logout</a>
+                 </div>
+            </nav>
+ {% else%}
+
+ {% endif %}
+
+    <div class="content">
+        {% block changeCurrency %}{% endblock %}
+        {% block content %}Content Here{% endblock %}
+    </div>
+
+</body>
+</html>

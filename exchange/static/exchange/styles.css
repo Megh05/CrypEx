@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+/* Apply blue theme to the table */
+body{
+    margin: 0;
+    background-color: #f5f5f5 !important;
+}
+
+nav {
+    font-family: 'Roboto', sans-serif;!important;
+    background-color:white;
+    font-size: 15px;
+    color: black; !important;
+}
+
+/* Table borders and padding */
+/* Table borders and padding */
+/* Table borders and padding */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    /*border: 1px solid #93c5fd;*/
+}
+
+table th, table td {
+    padding: 12px;
+    /*border: 1px solid #93c5fd;*/
+    /*text-align: center;*/
+}
+
+/* Table header styles */
+th {
+    background-color: #1f2937!important;
+    color: #fff;
+    text-align: center!important;
+}
+
+/* Positive and negative values */
+table td span.text-success {
+    color: #00cc00;
+}
+
+table td span.text-danger {
+    color: #ff0000;
+}
+
+/* Hover effect on table rows */
+table tbody tr:hover {
+    background-color: #d1d5db;
+    transition: background-color 0.3s ease;
+}
+
+
+/* Center the content within the container */
+.container {
+    text-align: center;
+}
+
+/* Apply padding and margin for better spacing */
+h1 {
+    margin-top: 20px;
+}
+
+table {
+    margin: 20px auto;
+    width: 80%;
+}
+
+.hero-img{
+    width: 360px;
+}
+
+.content{
+    min-height: calc(100vh - 74px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #004d40;
+    font-family: 'Poppins', sans-serif; /* Assuming you're using Poppins as mentioned before */
+
+}
+
+.form-left{
+    background-color: #101418;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo-wrapper{
+
+    width: 100%;
+    padding-left: 20px;
+    padding-top: 20px;
+
+}
+
+.hero-wrapper{
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.logo{
+    width: 150px;
+}
+
+@keyframes swing {
+  0%, 100% {
+    transform: rotate(-20deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+}
+
+.swing-animation {
+  display: inline-block; /* Allow transform origin changes */
+  animation: swing 2s infinite; /* Apply the swing animation */
+  transform-origin: center; /* Pivot around the center */
+  transform: rotate(0deg); /* Default position */
+}
+
+
+.login-form{
+    width: 60%;
+}
+.login-form .--form-wrapper{
+    margin-bottom: 0;
+}
+.login-form .--form-wrapper p {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form .--form-wrapper p label {
+    font-size: 14px;
+}
+
+.login-form .--form-wrapper p input{
+    padding: 5px 10px;
+    margin-bottom: 8px;
+}
+
+
+
+.form-wrapper{
+    background-color:#f0f9ff;
+    color:black;
+    padding: 0 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+.form-btn{
+    background-color: #4db6ac !important;
+    border-radius: 5px;
+    color: #ede7f6;
+    border: 1px solid #022c22;
+    cursor: pointer !important;
+    font-weight: bold;
+    transition: ease-in 300ms;
+}
+
+.form-btn:hover{
+    background-color: #004d40 !important;
+}
+.form-link{
+    color: black;
+    text-decoration: none;
+    margin-top: -10px!important;
+}
+.form-h1{
+    font-size: 32px;
+    text-align: center;
+}
+
+.app-content {
+  color: #FFFFFF; /* Light text for dark backgrounds */
+  background-color: #101418; /* Dark background */
+  font-family: 'Poppins', sans-serif; /* Assuming you're using Poppins as mentioned before */
+  text-align: center; /* Center the content */
+}
+
+.app-content p {
+  font-size: 34px; /* A welcoming, larger font size for the greeting */
+  font-weight: 600; /* A little bold for emphasis */
+  margin-bottom: 20px; /* Space before the next line */
+}
+
+.app-content span {
+  font-size: 18px; /* Suitable for call-to-action items */
+  display: inline-flex; /* Line up images with text */
+  margin: 0 10px; /* Spacing between Buy, Sell, Track */
+  vertical-align: middle; /* Align images and text vertically */
+    align-items: center;
+}
+
+.app-content img {
+  width: 35px; /* Assuming a small icon size */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 8px; /* Space between the icon and the text */
+}
+
+.logo-money{
+   width:300px;
+    position: absolute;
+    right: -70px;
+    bottom: -20px;
+}
+
+.logo-man{
+    width:200px;
+    position: absolute;
+    right: -15px;
+    bottom: -10px;
+}
+
+.register-done{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.change{
+    background-color: #f5f5f5;
+    color:black;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    overflow: hidden !important;
+}
+
+.--nav{
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 48px;
+}
+.--nav-link{
+    margin-right:6px;
+    font-weight: 600;
+    color: #000000;
+    text-decoration: none;
+}
+

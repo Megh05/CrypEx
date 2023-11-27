@@ -1,0 +1,117 @@
+{% extends "exchange/../base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="container-fluid self-start">
+
+
+    <div class="details m-4">
+    <div class="card border-light shadow-lg p-3 mb-5 bg-white rounded border-4">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <div class="card-body">
+                    <h6 class="card-title fw-bold">{{ cryptocurrency.name }}({{ cryptocurrency.symbol }})</h6>
+                    <h1 class="card-title fw-bold">$ {{ cryptocurrency.price }}</h1>
+                    <p class="card-text">1-Hour Forecast: {{ cryptocurrency.forecast_1h }}%</p>
+                    <p class="card-text">24-Hour Forecast: {{ cryptocurrency.forecast_24h }}%</p>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="card-body">
+{#                    <p class="card-text"></p>#}
+                    <p class="card-text">&nbsp</p>
+                    <p class="card-text">Market Cap: ${{ cryptocurrency.market_cap }}</p>
+                    <p class="card-text">Volume: ${{ cryptocurrency.volume }}</p>
+                    <p class="card-text">Circulating Supply: {{ cryptocurrency.circulating_supply }} {{ cryptocurrency.symbol }}</p>
+                    <p class="card-text">Total Supply: {{ cryptocurrency.total_supply }} {{ cryptocurrency.symbol }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-body">
+                    <div class="row">
+                        <p>Official Links</p>
+                        <div class="col-md-4">
+
+                    <a href="{{ cryptocurrency.official_site }}" class="btn btn-outline-primary" target="_blank">Official Site</a>
+                        </div>
+                        <div class="col-md-4">
+                    <a href="{{ cryptocurrency.whitepaper }}" class="btn btn-outline-primary" target="_blank">Whitepaper</a>
+
+                        </div>
+                        <div class="col-md-4">
+                    <a href="{{ cryptocurrency.github }}" class="btn btn-outline-primary" target="_blank">GitHub</a>
+
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p>Socials</p>
+                        <div class="col-md-4">
+
+                    <a href="{{ cryptocurrency.reddit }}" class="btn btn-outline-primary" target="_blank">Reddit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                <a href="{% url 'payment_gateway' %}" class="text-[#ffffff] hover:text-[#ffff] bg-blue-500 hover:bg-blue-700 text-center py-2">Buy</a>
+
+        </div>
+    </div>
+
+    <!-- Add Tabs -->
+    <ul class="nav nav-tabs" id="myTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="news-tab" data-toggle="tab" href="#news" role="tab" aria-controls="news" aria-selected="true">News</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false">About</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade" id="news" role="tabpanel" aria-labelledby="news-tab">
+        {% if newsList %}
+        <div class="">
+        {% for news in newsList %}
+        <p>
+        {{ news }}
+        </p>
+        {% endfor %}
+        </div>
+        {% else %}
+        <p>No information available</p>
+        {% endif %}
+    </div>
+    <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
+        {% if cryptocurrency.about %}
+        <div class="">
+        <p>
+        {{ cryptocurrency.about }}
+        </p>
+        </div>
+        {% else %}
+        <p>No information available</p>
+        {% endif %}
+    </div>
+</div>
+
+    </div>
+</div>
+    </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js"></script>
+
+{#<style>#}
+{#    .scrollable-content {#}
+{#        max-height: 250px;#}
+{#        overflow-y: auto;#}
+{#        border: 1px solid #e5e5e5;#}
+{#        padding: 10px;#}
+{#    }#}
+{#</style>#}
+{% endblock %}

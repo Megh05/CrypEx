@@ -1,0 +1,400 @@
+{% extends "exchange/../base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<style>
+        .slider-container {
+            width: 32%;
+            overflow: hidden;
+            height: 30vh;
+            margin: auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .slider1 {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .slide1 {
+            width: 100%;
+            height: 27vh;
+            flex-shrink: 0;
+            text-align: center;
+            display: flex;
+            justify-content:     center;
+            align-items: center;
+        }
+        .slider2 {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .slide2 {
+            width: 100%;
+            height: 27vh;
+            flex-shrink: 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slider3 {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .slide3 {
+            width: 100%;
+            flex-shrink: 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes markerMove {
+            100% {
+                margin-left: calc(0.73 * 33%);
+            }
+        }
+        .hidden-div {
+            display: none;
+        }
+    </style>
+
+
+    <div class="container self-start">
+        {% block highlight %}
+            <div class = " flex mt-10 justify-end">
+                <div class="mt-[-27px] w-[300px]">
+                    <label for="toggle-button">Highlights</label>
+                   <input class="mr-2 mt-[0.3rem] h-3.5 w-8 appearance-none rounded-[0.4375rem] bg-neutral-300 after:pointer-events-none after:absolute after:h-3.5 before:w-3.5 after:rounded-full after:bg-transparent after:content-[''] before:absolute after:z-[2] before:-mt-[0.1875rem] before:h-5 before:w-5 before:rounded-full before:border-none before:bg-neutral-100 before:shadow-[0_0px_3px_0_rgb(0_0_0_/_7%),_0_2px_2px_0_rgb(0_0_0_/_4%)] before:transition-[background-color_0.2s,transform_0.2s] before:content-[''] checked:bg-[#81c784] checked:before:absolute checked:before:z-[2] checked:before:-mt-[3px] checked:before:ml-[1.0625rem] checked:before:h-5 checked:before:w-5 checked:before:rounded-full checked:before:border-none checked:before:bg-[#81c784] checked:before:shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),_0_2px_2px_0_rgba(0,0,0,0.14),_0_1px_5px_0_rgba(0,0,0,0.12)] checked:before:transition-[background-color_0.2s,transform_0.2s] checked:before:content-[''] hover:cursor-pointer focus:outline-none focus:ring-0 focus:after:scale-100 focus:after:opacity-[0.12] focus:after:shadow-[3px_-1px_0px_13px_rgba(0,0,0,0.6)] focus:after:transition-[box-shadow_0.2s,transform_0.2s] focus:before:absolute focus:before:z-[1] focus:before:block focus:before:h-5 focus:before:w-5 focus:before:rounded-full focus:before:content-[''] checked:focus:border-primary checked:focus:bg-primary checked:focus:after:ml-[1.0625rem] checked:focus:after:scale-100 checked:focus:after:shadow-[3px_-1px_0px_13px_#3b71ca] checked:focus:after:transition-[box-shadow_0.2s,transform_0.2s] dark:bg-neutral-600 dark:before:bg-neutral-400 dark:checked:bg-[#81c784] dark:checked:before:bg-[#81c784] dark:focus:after:shadow-[3px_-1px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:after:shadow-[3px_-1px_0px_13px_#3b71ca]"
+       type="checkbox"
+       role="switch"
+       id="toggle-button"
+       checked
+/>
+
+                </div>
+             </div>
+            <br>
+            <div class="hidden-div" id="content" style="display: flex; flex-wrap: wrap; width: 100%;">
+                    <div style="width: 100%">
+                        <div style="background-color: #f5f5f5; display: flex; flex-wrap: wrap; height: 30vh; width: 100%">
+                            <div style="display: flex; flex-wrap: wrap; width: 100%;">
+                                <div class="slider-container">
+                                    <div class="slider1">
+                                        <div class="slide1">
+                                            <div style="width: 90%; margin: auto">
+                                                <table style="background: none; width: 108%">
+                                                    <thead>
+                                                        <tr style="">
+                                                            <a href="{% url 'trending_cryptocurrencies' %}"
+                                                               style="text-decoration: none; color: #676767; font-size: x-large">
+                                                                <div style="display: flex; justify-content: space-between;">
+                                                                    <div style="display: inline">Trending Currencies</div>
+                                                                    <div style="display: inline; font-size: 20px; color: #4db6ac">see more</div>
+                                                                </div>
+                                                            </a>
+                                                        </tr>
+                                                    <br>
+                                                    </thead>
+                                                    {% for crypto_list in trending_crypto_list %}
+                                                        <tr style="margin: auto; text-align: left;" onclick="window.location.href='{% url 'details' crypto_list.name %}'">
+                                                            <td>{{ crypto_list.id }}</td>
+                                                            <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                                                            <td>
+                                                                <div class="forecast" style="display: flex; width: 70%">
+                                                                    <div style="display: inline; margin: auto;" class="arrowContainer"></div>
+                                                                    <div style="display: inline">{{ crypto_list.forecast_24h }} %</div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="slide1">
+                                            <div style="width: 90%; margin: auto">
+                                                <table style="background: none; width: 108%">
+                                                    <thead>
+                                                        <tr style="height: auto">
+                                                            <a href="{% url 'gainers_losers' %}"
+                                                               style="text-decoration: none; color: #676767; font-size: x-large">
+                                                                <div style="display: flex; justify-content: space-between;">
+                                                                    <div style="display: inline">Top Gainers</div>
+                                                                    <div style="display: inline; font-size: smaller; color: #4db6ac">see more</div>
+                                                                </div>
+                                                            </a>
+                                                        </tr>
+                                                    <br>
+                                                    </thead>
+                                                    {% for crypto_list in gainers_crypto_list %}
+                                                        <tr style="margin: auto; text-align: left;" onclick="window.location.href='{% url 'details' crypto_list.name %}'">
+                                                            <td>{{ crypto_list.id }}</td>
+                                                            <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                                                            <td>
+                                                                <div class="forecast" style="display: flex; width: 90%">
+                                                                    <div style="margin: auto; width: 0;">
+                                                                        <div style="width: 0;
+                                                                            height: 0;
+                                                                            border-left: 5px solid transparent;
+                                                                            border-right: 5px solid transparent;
+                                                                            border-bottom: 7px solid #198600; ">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="display: inline">{{ crypto_list.forecast_24h }} %</div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="slide1">
+                                            <div style="width: 90%; margin: auto">
+                                                <table style="background: none; width: 108%">
+                                                    <thead>
+                                                        <tr style="height: auto">
+                                                            <a href="{% url 'gainers_losers' %}"
+                                                               style="text-decoration: none; color: #676767; font-size: x-large">
+                                                                <div style="display: flex; justify-content: space-between;">
+                                                                    <div style="display: inline">Top Losers</div>
+                                                                    <div style="display: inline; font-size: smaller; color: #4db6ac">see more</div>
+                                                                </div>
+                                                            </a>
+                                                        </tr>
+                                                    <br>
+                                                    </thead>
+                                                    {% for crypto_list in losers_crypto_list %}
+                                                        <tr style="margin: auto; text-align: left;" onclick="window.location.href='{% url 'details' crypto_list.name %}'">
+                                                            <td>{{ crypto_list.id }}</td>
+                                                            <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                                                            <td>
+                                                                <div class="forecast" style="display: flex; width: 90%">
+                                                                    <div style="margin: auto; width: 0;">
+                                                                        <div style="width: 0;
+                                                                            height: 0;
+                                                                            border-left: 5px solid transparent;
+                                                                            border-right: 5px solid transparent;
+                                                                            border-top: 7px solid #FF0000; ">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div style="display: inline">{{ crypto_list.forecast_24h }} %</div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="slide1">
+                                            <div style="width: 90%; margin: auto">
+                                                <table style="background: none; width: 108%">
+                                                    <thead>
+                                                        <tr style="height: auto">
+                                                            <a href="{% url 'most_visited' %}"
+                                                               style="text-decoration: none; color: #676767; font-size: x-large">
+                                                                <div style="display: flex; justify-content: space-between;">
+                                                                    <div style="display: inline">Most Visited</div>
+                                                                    <div style="display: inline; font-size: smaller; color: #4db6ac">see more</div>
+                                                                </div>
+                                                            </a>
+                                                        </tr>
+                                                    <br>
+                                                    </thead>
+                                                    {% for crypto_list in most_visited_crypto_list %}
+                                                        <tr style="margin: auto; text-align: left;" onclick="window.location.href='{% url 'details' crypto_list.name %}'">
+                                                            <td>{{ crypto_list.id }}</td>
+                                                            <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                                                            <td>
+                                                                <div class="forecast" style="display: flex; width: 70%">
+                                                                    <div style="display: inline; margin: auto;" class="arrowContainer"></div>
+                                                                    <div style="display: inline">{{ crypto_list.forecast_24h }} %</div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="slider-container">
+                                    <div class="slider2">
+                                        <div class="slide2">
+                                            <div style="display: flex; height: 30vh; width: 100%">
+                                                <div style="width: 100%;">
+                                                    <blockquote class="twitter-tweet">
+                                                        <a href="https://twitter.com/The_Conjineer/status/1721704801346470116?ref_src=twsrc%5Etfw"></a>
+                                                    </blockquote>
+                                                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slide2">
+                                            <div style="display: flex; height: 30vh; width: 100%">
+                                                <div style="width: 100%;">
+                                                    <blockquote class="twitter-tweet">
+                                                        <a href="https://twitter.com/The_Conjineer/status/1721710771380392090?ref_src=twsrc%5Etfw"></a>
+                                                    </blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="slider-container">
+                                    <div class="slider3">
+                                        <div class="slide3">
+                                            <div style="width: 90%">
+                                                <table style="background: none; width: 108%">
+                                                    <thead>
+                                                        <tr style="height: auto">
+                                                            <a href="{% url 'most_visited' %}"
+                                                               style="text-decoration: none; color: #676767; font-size: x-large">
+                                                                <div style="display: flex; justify-content: space-between;">
+                                                                    <div style="display: inline">Recently Added</div>
+                                                                    <div style="display: inline; font-size: smaller; color: #4db6ac">see more</div>
+                                                                </div>
+                                                            </a>
+                                                        </tr>
+                                                    <br>
+                                                    </thead>
+                                                    {% for crypto_list in recently_added_crypto_list %}
+                                                        <tr style="margin: auto; text-align: left;" onclick="window.location.href='{% url 'details' crypto_list.name %}'">
+                                                            <td>{{ crypto_list.id }}</td>
+                                                            <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                                                            <td>
+                                                                <div class="forecast" style="display: flex; width: 70%">
+                                                                    <div style="display: inline; margin: auto;" class="arrowContainer"></div>
+                                                                    <div style="display: inline">{{ crypto_list.forecast_24h }} %</div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {% endblock %}
+    <br>
+            <h1 class="text-center mb-3 mt-[-2] tracking-wide text-3xl font-bold font-montserrat text-[#52525b]">Cryptocurrencies</h1>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="">
+                            <tr>
+                                <th><a class="text-decoration-none link-light" href="?sort=id&direction={{ direction }}&sorted_column=id">#</a></th>
+                                <th><a class="text-decoration-none link-light"href="?sort=name&direction={{ direction }}&sorted_column=name">Name
+                                    {% if  sorted_column == 'name' and direction == 'asc' %}<span>↑</span>
+                                    {% elif sorted_column == 'name' and direction == 'desc'%}<span>↓</span>
+                                        {% else %}<span></span>
+                                    {% endif %}
+                                    </a>
+                                </th>
+                            <th><a class="text-decoration-none link-light"href="?sort=price&direction={{ direction }}&sorted_column=price">Price
+                                                            {% if  sorted_column == 'price' and direction == 'asc' %}<span>↑</span>
+                                            {% elif sorted_column == 'price' and direction == 'desc'%}<span>↓</span>
+                                                {% else %}<span></span>
+                                            {% endif %}
+                                            </a>
+                                <select id="currency" onchange="location = this.value;" style="padding: 2px; border: 1px solid #ccc; border-radius: 3px; background-color: #fff; color: #333; font-size: 14px;">
+                                        <option value="?currency=" {% if selected_currency == '' %}selected{% endif %}>{{ selected_currency|upper }}</option>
+                                        {% for currency in currency_list %}
+                                            {% if currency != selected_currency|upper %}
+                                                <option value="?currency={{ currency|lower }}" {% if selected_currency == currency|upper %}selected{% endif %}>{{ currency }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </th>
+                                <th><a class="text-decoration-none link-light"href="?sort=forecast_1h&direction={{ direction }}&sorted_column=forecast_1h">1-Hour Change
+                            {% if  sorted_column == 'forecast_1h' and direction == 'asc' %}<span>↑</span>
+                {% elif sorted_column == 'forecast_1h' and direction == 'desc'%}<span>↓</span>
+                    {% else %}<span></span>
+                {% endif %}
+</a></th>
+            <th><a class="text-decoration-none link-light"href="?sort=forecast_24h&direction={{ direction }}&sorted_column=forecast_24h">24-Hour Change
+                            {% if  sorted_column == 'forecast_24h' and direction == 'asc' %}<span>↑</span>
+                {% elif sorted_column == 'forecast_24h' and direction == 'desc'%}<span>↓</span>
+                    {% else %}<span></span>
+                {% endif %}
+</a></th>
+            <th><a class="text-decoration-none link-light"href="?sort=market_cap&direction={{ direction }}&sorted_column=market_cap">Market Cap
+                            {% if  sorted_column == 'market_cap' and direction == 'asc' %}<span>↑</span>
+                {% elif sorted_column == 'market_cap' and direction == 'desc'%}<span>↓</span>
+                    {% else %}<span></span>
+                {% endif %}
+</a></th>
+            <th><a class="text-decoration-none link-light"href="?sort=volume&direction={{ direction }}&sorted_column=volume">24-Hour Volume
+                            {% if  sorted_column == 'volume' and direction == 'asc' %}<span>↑</span>
+                {% elif sorted_column == 'volume' and direction == 'desc'%}<span>↓</span>
+                    {% else %}<span></span>
+                {% endif %}
+</a></th>
+            <th><a class="text-decoration-none link-light"href="?sort=circulating_supply&direction={{ direction }}&sorted_column=circulating_supply">Circulating Supply
+                {% if  sorted_column == 'circulating_supply' and direction == 'asc' %}<span>↑</span>
+                {% elif sorted_column == 'circulating_supply' and direction == 'desc'%}<span>↓</span>
+                    {% else %}<span></span>
+                {% endif %}
+</a></th>
+        </tr>
+                        </thead>
+                        <tbody>
+                            {% for currency in cryptocurrencies %}
+                                <tr class="{% cycle 'even' 'odd' %}" onclick="window.location.href='{% url 'details' currency.name %}'">
+                                    <td style="border: 1px solid #4db6ac; text-align: center;">{{currency.id}}</td>
+                                    <td class="cursor-pointer hover:bg-gray-100" style="border: 1px solid #4db6ac; text-align: center;">{{ currency.name }}</td>
+                                    <td style="border: 1px solid #4db6ac; text-align: center;">{{ currency_symbol }} {{ currency.price }}</td>
+                                    <td style="border: 1px solid #4db6ac; text-align: center;">
+                                        <span class="{% if currency.forecast_1h >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                            {{ currency.forecast_1h }}%
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid #4db6ac; text-align: center;">
+                                        <span class="{% if currency.forecast_24h >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                            {{ currency.forecast_24h }}%
+                                        </span>
+                                    </td>
+                                    <td style="border: 1px solid #4db6ac; text-align: center;">{{ currency.market_cap }}</td>
+                                    <td style="border: 1px solid #4db6ac; text-align: center;">{{ currency.volume }}</td>
+                                    <td style="border: 1px solid #4db6ac; text-align: center;">{{ currency.circulating_supply }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    <script>
+        const slider1 = document.querySelector('.slider1');
+        const slides1 = document.querySelectorAll('.slide1');
+        const slider2 = document.querySelector('.slider2');
+        const slides2 = document.querySelectorAll('.slide2');
+        let slideIndex1 = 0, slideIndex2 = 0;
+        const toggleButton = document.getElementById("toggle-button");
+        const contentDiv = document.getElementById("content");
+        toggleButton.addEventListener("click", function () {
+            if (contentDiv.style.display === "none") {
+                contentDiv.style.display = "flex";
+                toggleButton.classList.add("active");
+            } else {
+                contentDiv.style.display = "none";
+                toggleButton.classList.remove("active");
+            }
+        });
+        function updateSlider() {
+            slider1.style.transform = `translateX(-${slideIndex1 * 100}%)`;
+            slider2.style.transform = `translateX(-${slideIndex2 * 100}%)`;
+        }
+        function nextSlide() {
+            slideIndex1 = (slideIndex1 + 1) % slides1.length;
+            slideIndex2 = (slideIndex2 + 1) % slides2.length;
+            updateSlider();
+        }
+        setInterval(nextSlide, 4000);
+    </script>
+{% endblock %}

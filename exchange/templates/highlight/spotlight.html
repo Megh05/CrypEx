@@ -1,0 +1,202 @@
+{% extends 'highlight/spotlight_base.html' %}
+{% block title %}Spotlight{% endblock %}
+{% block body %}
+    <div style="display: flex; flex-wrap: wrap; width: 100%;">
+        <table style="width: 100%;">
+            <tr style="height: 9vh">
+                <td style="padding: 1%">
+                    <div class="card" style="width: 100%">
+                        <div style="width: 95%; margin: auto">
+                            <table style="background: none; width: 100%">
+                                <thead>
+                                    <tr style="height: auto">
+                                        <a href="{% url 'trending_cryptocurrencies' %}"
+                                           style="text-decoration: none; color: #676767; font-size: large">
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <div style="display: inline">Trending Currencies</div>
+                                                <div style="display: inline; font-size: smaller; color: #4db6ac">More ></div>
+                                            </div>
+                                        </a>
+                                    </tr>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>Name</td>
+                                        <td>Price $</td>
+                                        <td>1H %</td>
+                                        <td>24H %</td>
+                                    </tr>
+                                </thead>
+                                {% for crypto_list in trending_crypto_list %}
+                                    <tr style="border: 1px solid rgb(0, 0, 0, 0.1); border-left: none; border-right: none;"
+                                        onclick="window.location.href='{% url 'details' crypto_list.name %}'"
+                                        onmouseover="this.style.backgroundColor='#f0f0f0'"
+                                        onmouseout="this.style.backgroundColor='transparent'">
+                                        <td>{{ crypto_list.id }}</td>
+                                        <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                                        <td>{{ crypto_list.price }}</td>
+                                        <td>{{ crypto_list.forecast_1h }}</td>
+                                        <td>{{ crypto_list.forecast_24h }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </td>
+                <td style="padding: 1%">
+                    <div class="card" style="width: 100%">
+                        <div style="width: 95%; margin: auto">
+                            <table style="background: none; width: 100%">
+                                <thead>
+                                    <tr style="height: auto">
+                                        <a href="{% url 'gainers_losers' %}"
+                                           style="text-decoration: none; color: #676767; font-size: large">
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <div style="display: inline">Top Gainers</div>
+                                                <div style="display: inline; font-size: smaller; color: #4db6ac">More ></div>
+                                            </div>
+                                        </a>
+                                    </tr>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>Name</td>
+                                        <td>Price $</td>
+                                        <td>1H %</td>
+                                        <td>24H %</td>
+                                    </tr>
+                                </thead>
+                                {% for crypto_list in gainers_crypto_list %}
+                                    <tr style="border: 1px solid rgb(0, 0, 0, 0.1); border-left: none; border-right: none;"
+                                        onclick="window.location.href='{% url 'details' crypto_list.name %}'"
+                                        onmouseover="this.style.backgroundColor='#f0f0f0'"
+                                        onmouseout="this.style.backgroundColor='transparent'">
+                                        <td>{{ crypto_list.id }}</td>
+                                        <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                                        <td>{{ crypto_list.price }}</td>
+                                        <td>{{ crypto_list.forecast_1h }}</td>
+                                        <td>{{ crypto_list.forecast_24h }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </td>
+                <td style="padding: 1%">
+                    <div class="card" style="width: 100%">
+                        <div style="width: 95%; margin: auto">
+                            <table style="background: none; width: 100%">
+                                <thead>
+                                    <tr style="height: auto">
+                                        <a href="{% url 'gainers_losers' %}"
+                                           style="text-decoration: none; color: #676767; font-size: large">
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <div style="display: inline">Top Losers</div>
+                                                <div style="display: inline; font-size: smaller; color: #4db6ac">More ></div>
+                                            </div>
+                                        </a>
+                                    </tr>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>Name</td>
+                                        <td>Price $</td>
+                                        <td>1H %</td>
+                                        <td>24H %</td>
+                                    </tr>
+                                </thead>
+                                {% for crypto_list in losers_crypto_list %}
+                                    <tr style="border: 1px solid rgb(0, 0, 0, 0.1); border-left: none; border-right: none;"
+                                        onclick="window.location.href='{% url 'details' crypto_list.name %}'"
+                                        onmouseover="this.style.backgroundColor='#f0f0f0'"
+                                        onmouseout="this.style.backgroundColor='transparent'">
+                                        <td>{{ crypto_list.id }}</td>
+                                        <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                                        <td>{{ crypto_list.price }}</td>
+                                        <td>{{ crypto_list.forecast_1h }}</td>
+                                        <td>{{ crypto_list.forecast_24h }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 1%">
+                    <div class="card" style="width: 100%">
+                        <div style="width: 95%; margin: auto">
+                            <table style="background: none; width: 100%">
+                                <thead>
+                                    <tr style="height: auto">
+                                        <a href="{% url 'most_visited' %}"
+                                           style="text-decoration: none; color: #676767; font-size: large">
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <div style="display: inline">Most Visited</div>
+                                                <div style="display: inline; font-size: smaller; color: #4db6ac">More ></div>
+                                            </div>
+                                        </a>
+                                    </tr>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>Name</td>
+                                        <td>Price $</td>
+                                        <td>1H %</td>
+                                        <td>24H %</td>
+                                    </tr>
+                                </thead>
+                                {% for crypto_list in most_visited_crypto_list %}
+                                    <tr style="border: 1px solid rgb(0, 0, 0, 0.1); border-left: none; border-right: none;"
+                                        onclick="window.location.href='{% url 'details' crypto_list.name %}'"
+                                        onmouseover="this.style.backgroundColor='#f0f0f0'"
+                                        onmouseout="this.style.backgroundColor='transparent'">
+                                        <td>{{ crypto_list.id }}</td>
+                                        <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                                        <td>{{ crypto_list.price }}</td>
+                                        <td>{{ crypto_list.forecast_1h }}</td>
+                                        <td>{{ crypto_list.forecast_24h }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            <td style="padding: 1%">
+                    <div class="card" style="width: 100%">
+                        <div style="width: 95%; margin: auto">
+                            <table style="background: none; width: 100%">
+                                <thead>
+                                    <tr style="height: auto">
+                                        <a href="{% url 'recently_added' %}"
+                                           style="text-decoration: none; color: #676767; font-size: large">
+                                            <div style="display: flex; justify-content: space-between;">
+                                                <div style="display: inline">Recently Added</div>
+                                                <div style="display: inline; font-size: smaller; color: #4db6ac">More ></div>
+                                            </div>
+                                        </a>
+                                    </tr>
+                                    <tr>
+                                        <td>#</td>
+                                        <td>Name</td>
+                                        <td>Price $</td>
+                                        <td>1H %</td>
+                                        <td>24H %</td>
+                                    </tr>
+                                </thead>
+                                {% for crypto_list in recently_added_crypto_list %}
+                                    <tr style="border: 1px solid rgb(0, 0, 0, 0.1); border-left: none; border-right: none;"
+                                        onclick="window.location.href='{% url 'details' crypto_list.name %}'"
+                                        onmouseover="this.style.backgroundColor='#f0f0f0'"
+                                        onmouseout="this.style.backgroundColor='transparent'">
+                                        <td>{{ crypto_list.id }}</td>
+                                        <td>{{ crypto_list.name }} ( {{ crypto_list.symbol }} )</td>
+                                        <td>{{ crypto_list.price }}</td>
+                                        <td>{{ crypto_list.forecast_1h }}</td>
+                                        <td>{{ crypto_list.forecast_24h }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Log-in{% endblock %}
+
+{% block content %}
+    {#    left side #}
+
+        <div class="form-left h-screen">
+            <div class="logo-wrapper">
+                <img class="logo" alt="logo" src="../../static/exchange/img/logo-color.png">
+            </div>
+            <div class="app-content mt-5">
+              <p>Welcome to CryptoNest</p>
+              <span class="logo-gif"><img src="../../static/exchange/img/buy.gif" alt="Buy Icon"> Buy</span>
+              <span class="logo-gif"><img src="../../static/exchange/img/sell.gif" alt="Sell Icon"> Sell</span>
+              <span class="logo-gif"><img src="../../static/exchange/img/track.gif" alt="Track Icon"> Track</span>
+            </div>
+
+            <div class="hero-wrapper">
+            <img class="hero-img swing-animation" alt="attr" src="../../static/exchange/img/bitcoin1.png">
+            </div>
+
+
+        </div>
+{#    right side #}
+     <div class="form-wrapper h-screen">
+         <h1 class = "form-h1">Log In</h1>
+    {% if form.errors %}
+        <p>
+            Please, Check Your Username and Password
+        </p>
+    {% endif %}
+    <div class='login-form'>
+        <form class="--form-wrapper" action="{% url 'login' %}" method='post'>
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type='hidden' name='next' value="{{ next }}" />
+            <p><input class="text-[#ffffff] hover:text-[#ffff] bg-blue-500 hover:bg-blue-700 mt-2" type='submit' value='Log-in'></p>
+        </form>
+        <p>
+            <a class="form-link" href="{% url 'password_reset' %}">
+                Forgot your password ?
+            </a>
+            <a class="form-link" href="{% url 'register' %}">Register</a>
+        </p>
+        </div>
+         <div class="img-container">
+             <img class="logo-money" alt="attr" src="../../static/exchange/img/money.png"></div>
+      </div>
+{% endblock %}
